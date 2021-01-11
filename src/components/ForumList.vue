@@ -27,6 +27,4 @@ class ForumList extends Vue {
 export default ForumList;
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
