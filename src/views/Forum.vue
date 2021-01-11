@@ -27,10 +27,10 @@ class Forum extends Vue {
     this.$store.dispatch("fetchForumById", this.$route.params.id);
   }
 
-  navigate(id) {
-    this.$store.commit("setThread", this.thread);
-    this.$router.push({ path: `/forum/thread/${id}` });
-  }
+  // navigate(id) {
+  //   this.$store.commit("setThread", this.thread);
+  //   this.$router.push({ path: `/forum/thread/${id}` });
+  // }
 }
 
 export default Forum;
