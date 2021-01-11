@@ -10,6 +10,8 @@ export default new Vuex.Store({
     forums: null,
     thread: null,
     threads: null,
+    message: null,
+    messages: null,
   },
   mutations: {
     setForums(state, data) {
@@ -30,6 +32,15 @@ export default new Vuex.Store({
     setLoggedInUser(state, data) {
       state.loggedInUser = data;
     },
+    setMessage(state, data){
+      state.message = data;
+    },
+    setMessages(state, data){
+      state.messages = data;
+    },
+    createNewMessage(state, data){
+      state.thread.messages.push(data);
+    }
   },
   actions: {
     async fetchAllForums({ commit }) {
@@ -48,11 +59,19 @@ export default new Vuex.Store({
       commit("setForum", forum);
     },
 
+    async fetchMessageByThreadId({commit}, id){
+      console.log("INNE I MESSAGEBYTHREADID");
+      const messageResult = await fetch(`/api/v1/threads/${id}/messages`);
+      const message = await messageResult.json();
+      console.log(message, "ETT MESSAGE");
+      commit("setMessage", message);
+    },
+
     async whoami({ commit }) {
       let user = await fetch("/auth/whoami");
       try {
         user = await user.json();
-        console.log(user);
+        console.log("User", user);
         commit("setLoggedInUser", user);
       } catch {
         console.log("Not authenticated");
