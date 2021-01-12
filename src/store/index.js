@@ -12,6 +12,8 @@ export default new Vuex.Store({
     threads: null,
     message: null,
     messages: null,
+    users: null,
+    user: null,
   },
   mutations: {
     setForums(state, data) {
@@ -40,6 +42,12 @@ export default new Vuex.Store({
     },
     createNewMessage(state, data){
       state.thread.messages.push(data);
+    },
+    setUser(state, data){
+      state.user = data;
+    },
+    setUsers(state, data){
+      state.users = data;
     }
   },
   actions: {
@@ -65,6 +73,14 @@ export default new Vuex.Store({
       const message = await messageResult.json();
       console.log(message, "ETT MESSAGE");
       commit("setMessage", message);
+    },
+
+    async fetchAllUsers({commit}){
+      console.log("INNE I FETCH USERS BY ID");
+      const userResult = await fetch("/api/v1/users");
+      const user = await userResult.json();
+      console.log(user, "Alla users");
+      commit("setUser", user);
     },
 
     async whoami({ commit }) {
