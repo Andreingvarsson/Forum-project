@@ -5,7 +5,7 @@
         <blockquote class="blockquote mb-0 message">
           <p>{{message.message}}</p>
           <footer class="blockquote-footer message">
-            Member replying: {{message.messageOwner.username}}
+            {{message.messageOwner.username}} replies:
           </footer>
         </blockquote>
       </div>

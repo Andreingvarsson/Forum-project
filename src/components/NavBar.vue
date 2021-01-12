@@ -1,6 +1,7 @@
 <template>
   <div class="navbar">
-    <h1 @click="goHome">GamingForum</h1>
+    <h1 class="point" @click="goHome">GamingForum</h1>
+    <div v-if="user" @click="goToAdmin">Admin</div>
     <router-link v-if="!user" to="/login">Login</router-link>
     <div v-if="user" @click="logoutUser">Logout</div>
   </div>
@@ -9,11 +10,22 @@
 <script>
 import { Vue, Component } from "vue-property-decorator";
 
-@Component
+
+@Component({
+  components: {}
+})
 class NavBar extends Vue {
   goHome() {
     this.$router.push({ path: "/" });
   }
+
+  goToAdmin(){
+    if(this.user.roles.includes("ADMIN")){
+      this.$router.push({path: "/admin"})
+    }
+  
+  }
+
   get user() {
     return this.$store.state.loggedInUser;
   }
@@ -33,6 +45,8 @@ class NavBar extends Vue {
         console.log(error);
       });
   }
+
+
 }
 export default NavBar;
 </script>
@@ -46,4 +60,9 @@ export default NavBar;
 .h1 {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.point{
+  cursor: pointer;
+}
+
 </style>

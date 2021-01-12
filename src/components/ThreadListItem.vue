@@ -4,7 +4,7 @@
       <div @click="navigate" class="card-body row">
         <h1 class="card-title title-text col-6">{{ thread.title }}</h1>
         <p class="card-text message-text col-7">{{ thread.threadMessage }}</p>
-        <span class="col-6 size">{{ thread.timestamp }}</span>
+        <!-- <span class="col-6 size">{{ thread.timestamp }}</span> -->
       </div>
     </div>
   </div>
