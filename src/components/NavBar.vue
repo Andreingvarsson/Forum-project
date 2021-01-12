@@ -1,9 +1,9 @@
 <template>
   <div class="navbar">
     <h1 class="point" @click="goHome">GamingForum</h1>
-    <div v-if="user" @click="goToAdmin">Admin</div>
+    <div  class="point" v-if="user ? user.roles.includes('ADMIN') : false" @click="goToAdmin">Admin</div>
     <router-link v-if="!user" to="/login">Login</router-link>
-    <div v-if="user" @click="logoutUser">Logout</div>
+    <div class="point" v-if="user" @click="logoutUser">Logout</div>
   </div>
 </template>
 
@@ -15,6 +15,12 @@ import { Vue, Component } from "vue-property-decorator";
   components: {}
 })
 class NavBar extends Vue {
+
+  // Generic goto route method
+  goTo(route){
+    if(this.$route.path != route) this.$router.push({path: route})
+  }
+
   goHome() {
     this.$router.push({ path: "/" });
   }
